@@ -180,7 +180,47 @@ print(data_frame_max_min)
 
 
 # ---------- QUESTÃO 8 ----------
+getBestYear = function() {
+  data_frame_mod = data_frame
+  data_frame_mod = data_frame_mod[order(data_frame_mod$ANO),]
+  ANOS_MOD = data_frame_mod$ANO
+  NOTAS_MOD = data_frame_mod$NOTAS
+  ano_atual = ANOS_MOD[1]
+  films_per_year = c(0)
+  all_years = c(ano_atual)
+  i = 1
+  for(a in ANOS_MOD) {
+    if(a != ano_atual) {
+      all_years = c(all_years, a)
+      if(NOTAS_MOD[i] >= 6.5) {
+        films_per_year = c(films_per_year, 1)
+      } else {
+        films_per_year = c(films_per_year, 0)
+      }
+    } else {
+      if(NOTAS_MOD[i] >= 6.5) {
+        films_per_year[length(films_per_year)] = films_per_year[length(films_per_year)] + 1
+      }
+    }
+    ano_atual = a
+    i = i + 1
+  }
+  
+  max_films = films_per_year[1]
+  i = 1
+  max_films_index = 0
+  for(n in films_per_year) {
+    if(n > max_films) {
+      max_films = n
+      max_films_index = i
+    }
+    i = i + 1
+  }
+  
+  return(all_years[max_films_index])
+}
 
+print(getBestYear())
 # ---------- FIM DA QUESTÃO 8 ----------
 
 
