@@ -4,7 +4,7 @@
 # ---------- QUESTÃƒO 1 ----------
 # Basicamente usamos a biblioteca ensinada em aula para ler o .csv
 
-data_frame = read.csv("Sandler - PÃ¡gina1.csv")
+data_frame = read.csv("Sandler - Página1.csv")
 print(data_frame)
 # ---------- FIM DA QUESTÃƒO 1 ---------
 
@@ -182,13 +182,21 @@ print(data_frame_max_min)
 # ---------- QUESTÃƒO 8 ----------
 getBestYear = function() {
   data_frame_mod = data_frame
+  
+  #Primeiro ordenamos o dataframe segundo os anos da lançamento dos filmes
   data_frame_mod = data_frame_mod[order(data_frame_mod$ANO),]
+  
+  #Agora tomamos vetores com os valores dos anos e notas já reordenados
   ANOS_MOD = data_frame_mod$ANO
   NOTAS_MOD = data_frame_mod$NOTAS
   ano_atual = ANOS_MOD[1]
   films_per_year = c(0)
   all_years = c(ano_atual)
   i = 1
+  
+  #Por fim percorremos linearmente o vetor dos anos verificando se o vetor
+  #das notas na posição i tem valor maior ou igual que 6.5, preenchendo um
+  #vetor com o número de notas maiores que 6.5 em cada um nos anos
   for(a in ANOS_MOD) {
     if(a != ano_atual) {
       all_years = c(all_years, a)
@@ -226,5 +234,57 @@ print(getBestYear())
 
 
 # ---------- QUESTÃƒO 9 ----------
+
+#Usamos a mesmas estratégia da questão anterior para encontrar
+#o número de filmes por ano com nota maior ou igual que 6
+data_frame_mod = data_frame
+data_frame_mod = data_frame_mod[order(data_frame_mod$ANO),]
+ANOS_MOD = data_frame_mod$ANO
+NOTAS_MOD = data_frame_mod$NOTAS
+ano_atual = ANOS_MOD[1]
+films_per_year = c(0)
+all_years = c(ano_atual)
+i = 1
+for(a in ANOS_MOD) {
+  if(a != ano_atual) {
+    all_years = c(all_years, a)
+    if(NOTAS_MOD[i] >= 6) {
+      films_per_year = c(films_per_year, 1)
+    } else {
+      films_per_year = c(films_per_year, 0)
+    }
+  } else {
+    if(NOTAS_MOD[i] >= 6) {
+      films_per_year[length(films_per_year)] = films_per_year[length(films_per_year)] + 1
+    }
+  }
+  ano_atual = a
+  i = i + 1
+}
+
+#Agora preenchemos um novo vetor, para inserir os anos
+#em que não houveram filmes no dado intervalo entre o
+#a primeira e ultima data de lançamento
+min_year = all_years[1]
+max_year = all_years[length(all_years)]
+ano_atual = min_year
+all_interval_of_years = min_year:max_year
+all_interval_of_films_per_year = c()
+i = 1
+
+for(a in all_interval_of_years){
+  if(all_years[i] == a){
+    all_interval_of_films_per_year = c(all_interval_of_films_per_year, films_per_year[i])
+    i = i + 1
+  }else{
+    all_interval_of_films_per_year = c(all_interval_of_films_per_year,0)
+  }
+}
+
+#por fim com um vetor com todos os anos e todas as notas
+#construimos um data frame
+
+data_set_films_per_year = data.frame("Frequency"= all_interval_of_films_per_year, "YEARS" = all_interval_of_years)
+hist(data_set_films_per_year)
 
 # ---------- FIM DA QUESTÃƒO 9 ----------
