@@ -4,8 +4,10 @@
 # ---------- QUESTÃO 1 ----------
 # Basicamente usamos a biblioteca ensinada em aula para ler o .csv
 
-data_frame = read.csv("Sandler - P�gina1.csv")
+data_frame = read.csv("Sandler - Página1.csv")
+print('Questao 1:')
 print(data_frame)
+cat("\n")
 # ---------- FIM DA QUESTÃO 1 ---------
 
 
@@ -23,8 +25,9 @@ for(x in NOTAS){
 num_filmes = length(NOTAS)
 
 media = sum/num_filmes
-resp_media = paste0('Media: ', media)
+resp_media = paste0('Questao 2: ', media)
 print(resp_media)
+cat("\n")
 # ---------- FIM DA QUESTÃO 2 ---------
 
 
@@ -44,8 +47,9 @@ variancia = sum_var/num_filmes
 
 #agora como temos que o desvio padrao é a raiz quadrada da variancia
 desvio_padrao = sqrt(variancia)
-resp_desvio_padrao = paste0('Desvio Padrao: ', desvio_padrao)
+resp_desvio_padrao = paste0('Questao 3: ', desvio_padrao)
 print(resp_desvio_padrao)
+cat("\n")
 # ---------- FIM DA QUESTÃO 3 ----------
 
 
@@ -79,8 +83,9 @@ for(n in ordered_notas) {
     size_attempt = 0
   }
 }
-resp_moda = paste0('Moda: ', moda)
+resp_moda = paste0('Questao 4: ', moda)
 print(resp_moda)
+cat("\n")
 # ---------- FIM DA QUESTÃO 4 ----------
 
 
@@ -96,8 +101,9 @@ getHigher = function(val) {
   }
   return(high_notas)
 }
-
+print('Questao 5:')
 print(getHigher(6))
+cat("\n")
 # ---------- FIM DA QUESTÃO 5 ----------
 
 
@@ -111,7 +117,9 @@ getSmaller =  function(val) {
   return(small_notas)
 }
 
+print('Questao 6:')
 print(getSmaller(6))
+cat("\n")
 # ---------- FIM DA QUESTÃO 6 ----------
 
 
@@ -141,7 +149,7 @@ getMinMax = function() {
   resp = c(paste(TITULOS[min_pos]), paste(TITULOS[max_pos]))
   return(resp)
 }
-
+print('Questao 7:')
 print(getMinMax())
 
 # função usada para a criação do data.frame
@@ -175,6 +183,7 @@ vector_notas = c(NOTAS[min_pos], NOTAS[max_pos])
 data_frame_max_min = data.frame(TITULO = vector_titulo, NOTA = vector_notas, ANO = vector_ano)
 
 print(data_frame_max_min)
+cat("\n")
 # ---------- FIM DA QUESTÃO 7 ----------
 
 
@@ -183,10 +192,10 @@ print(data_frame_max_min)
 getBestYear = function() {
   data_frame_mod = data_frame
   
-  #Primeiro ordenamos o dataframe segundo os anos da lan�amento dos filmes
+  #Primeiro ordenamos o dataframe segundo os anos da lan?amento dos filmes
   data_frame_mod = data_frame_mod[order(data_frame_mod$ANO),]
   
-  #Agora tomamos vetores com os valores dos anos e notas j� reordenados
+  #Agora tomamos vetores com os valores dos anos e notas j? reordenados
   ANOS_MOD = data_frame_mod$ANO
   NOTAS_MOD = data_frame_mod$NOTAS
   ano_atual = ANOS_MOD[1]
@@ -195,8 +204,8 @@ getBestYear = function() {
   i = 1
   
   #Por fim percorremos linearmente o vetor dos anos verificando se o vetor
-  #das notas na posi��o i tem valor maior ou igual que 6.5, preenchendo um
-  #vetor com o n�mero de notas maiores que 6.5 em cada um nos anos
+  #das notas na posi??o i tem valor maior ou igual que 6.5, preenchendo um
+  #vetor com o n?mero de notas maiores que 6.5 em cada um nos anos
   for(a in ANOS_MOD) {
     if(a != ano_atual) {
       all_years = c(all_years, a)
@@ -228,15 +237,41 @@ getBestYear = function() {
   return(all_years[max_films_index])
 }
 
+print('Questao 8:')
 print(getBestYear())
+cat("\n")
 # ---------- FIM DA QUESTÃO 8 ----------
 
-
-
 # ---------- QUESTÃO 9 ----------
+# usamos a mesma abordagem da questão 8, mas, dessa vez, 
+# permitimos a aparição de valores repetidos para o vetor que vai gerar o histograma
 
-#Usamos a mesmas estrat�gia da quest�o anterior para encontrar
-#o n�mero de filmes por ano com nota maior ou igual que 6
+data_frame_mod = data_frame
+data_frame_mod = data_frame_mod[order(data_frame_mod$ANO),]
+ANOS_MOD = data_frame_mod$ANO
+NOTAS_MOD = data_frame_mod$NOTAS
+i = 1
+
+anos_hist = c()
+
+for(a in ANOS_MOD) {
+  if(NOTAS_MOD[i] >= 6) {
+    anos_hist = c(anos_hist, a)
+  }
+  i = i+1
+}
+
+
+hist(anos_hist, breaks = length(anos_hist), col = '#002366', border = '#ffffff', 
+     main = 'Filmes com notas maiores ou iguais a seis', xlab = 'Anos', ylab = 'Frequencia')
+
+
+# ---------- FIM DA QUESTÃO 9 ----------
+
+
+
+# ---------- QUESTÃO 9 (ABORDAGEM COM GRAFICO DE BARRAS) ----------
+# abordagem da questao 8
 data_frame_mod = data_frame
 data_frame_mod = data_frame_mod[order(data_frame_mod$ANO),]
 ANOS_MOD = data_frame_mod$ANO
@@ -263,8 +298,8 @@ for(a in ANOS_MOD) {
 }
 
 #Agora preenchemos um novo vetor, para inserir os anos
-#em que n�o houveram filmes no dado intervalo entre o
-#a primeira e ultima data de lan�amento
+#em que nao houve filmes no dado intervalo entre o
+#a primeira e ultima data de lan軋mento
 min_year = all_years[1]
 max_year = all_years[length(all_years)]
 ano_atual = min_year
@@ -281,10 +316,6 @@ for(a in all_interval_of_years){
   }
 }
 
-#por fim com um vetor com todos os anos e todas as notas
-#construimos um data frame
-
-data_set_films_per_year = data.frame("Frequency"= all_interval_of_films_per_year, "YEARS" = all_interval_of_years)
-hist(data_set_films_per_year)
-
-# ---------- FIM DA QUESTÃO 9 ----------
+barplot(all_interval_of_films_per_year, names.arg = all_interval_of_years, space = 0.3, col = '#8cba4e', border = '#8cba4e',
+        main = 'Filmes com notas maiores ou iguais a seis', xlab = 'Anos', ylab = 'Frequencia')
+# ---------- FIM ----------
