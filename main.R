@@ -15,6 +15,8 @@ cat("\n")
 # ---------- QUESTÃO 2 ----------:
 # Armazenando as notas em um vetor
 NOTAS = data_frame$NOTAS
+ANOS = data_frame$ANO
+TITULOS = data_frame$TITULOS
 
 # Calculando a soma das notas
 sum = 0;
