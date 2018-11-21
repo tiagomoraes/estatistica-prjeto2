@@ -45,7 +45,7 @@ for(x in NOTAS) {
   sum_var = sum_var + ((media-x)*(media-x))
 }
 
-variancia = sum_var/num_filmes
+variancia = sum_var/(num_filmes-1)
 
 #agora como temos que o desvio padrao é a raiz quadrada da variancia
 desvio_padrao = sqrt(variancia)
