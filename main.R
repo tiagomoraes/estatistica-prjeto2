@@ -91,13 +91,16 @@ cat("\n")
 
 
 # ---------- QUESTÃO 5 ----------
-# percorremos o vetor de notas, quando o elemento analisado é maior que 6, adicionamos em outro vetor
+# percorremos o vetor de notas, quando o elemento analisado é maior que 6,
+# adicionamos o titulo correspondente em outro vetor
 getHigher = function(val) {
   high_notas = c()
+  i = 1
   for(n in NOTAS) {
     if(n >= val) {
-      high_notas = c(high_notas, n)
+      high_notas = c(high_notas, paste0(TITULOS[i]))
     }
+    i = i + 1
   }
   return(high_notas)
 }
@@ -110,15 +113,15 @@ cat("\n")
 
 # ---------- QUESTÃO 6 ----------
 # usamos uma forma de remover os elementos de um vetor do outro
-# removemos todos os elementos que estão no resultado da função getHigher() de uma cópia de NOTAS
+# removemos todos os elementos que estão no resultado da função getHigher() de uma cópia de TITULOS
 getSmaller =  function(val) {
-  high_notas_to_remove = getHigher(val)
-  small_notas = NOTAS [! NOTAS %in% high_notas_to_remove]
-  return(small_notas)
+  high_films_to_remove = getHigher(val)
+  small_films = TITULOS [! TITULOS %in% high_films_to_remove]
+  return(length(small_films))
 }
 
-print('Questao 6:')
-print(getSmaller(6))
+resp_small_notas = paste0('Questao 6: ', getSmaller(6), ' filmes com notas menores que 6')
+print(resp_small_notas)
 cat("\n")
 # ---------- FIM DA QUESTÃO 6 ----------
 
@@ -237,8 +240,8 @@ getBestYear = function() {
   return(all_years[max_films_index])
 }
 
-print('Questao 8:')
-print(getBestYear())
+resp_best_year = paste0('Questao 8: ', getBestYear())
+print(resp_best_year)
 cat("\n")
 # ---------- FIM DA QUESTÃO 8 ----------
 
@@ -316,6 +319,5 @@ for(a in all_interval_of_years){
   }
 }
 
-barplot(all_interval_of_films_per_year, names.arg = all_interval_of_years, space = 0.3, col = '#8cba4e', border = '#8cba4e',
-        main = 'Filmes com notas maiores ou iguais a seis', xlab = 'Anos', ylab = 'Frequencia')
+# barplot(all_interval_of_films_per_year, names.arg = all_interval_of_years, space = 0.3, col = '#8cba4e', border = '#8cba4e', main = 'Filmes com notas maiores ou iguais a seis', xlab = 'Anos', ylab = 'Frequencia')
 # ---------- FIM ----------
